@@ -11,6 +11,4 @@ projects:
       - label: Catalogue Service
         docker_compose_file_path: /Users/mohammad/Documents/projects/goworkspace/src/dcli-other-projects/project-one/catalogue-service/docker-compose.yaml
     common:
-      containers:
-        - open-webui
       docker_compose_file_path: /Users/mohammad/Documents/projects/goworkspace/src/dcli-other-projects/project-one/common-services/docker-compose.yaml

@@ -2,9 +2,10 @@ package cli
 
 import (
 	"github.com/manifoldco/promptui"
-	"github.com/mh-daneshvar/dcli/internal/adapters/primary/cli/localdevelopment"
 	"github.com/spf13/cobra"
 	"log"
+
+	"github.com/mh-daneshvar/dcli/internal/adapters/primary/cli/localdevelopment"
 )
 
 var rootCmd = &cobra.Command{
