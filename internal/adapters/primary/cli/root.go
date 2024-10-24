@@ -1,23 +1,23 @@
 package cli
 
 import (
-	"github.com/manifoldco/promptui"
-	"github.com/spf13/cobra"
 	"log"
 
 	"github.com/mh-daneshvar/dcli/internal/adapters/primary/cli/localdevelopment"
+	"github.com/mh-daneshvar/dcli/internal/common/utils/ui"
+	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
 	Use:   "",
 	Short: "D-CLI tool",
-	Long:  ``,
-	Run:   handler,
+	Long:  "D-CLI is a tool for managing local development environments and other CLI actions.",
+	Run:   runRootCmd,
 }
 
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		log.Fatalf("Command execution failed: %v", err)
+		log.Fatalf("Error executing root command: %v", err)
 	}
 }
 
@@ -25,21 +25,21 @@ func init() {
 	rootCmd.AddCommand(localdevelopment.Cmd)
 }
 
-func handler(cmd *cobra.Command, args []string) {
+func runRootCmd(cmd *cobra.Command, args []string) {
 	const localDevelopmentOption = "Local Development"
 
-	prompt := promptui.Select{
-		Label: "Select An Action",
-		Items: []string{localDevelopmentOption},
-	}
-
-	_, result, err := prompt.Run()
+	action, err := ui.RunPrompt(
+		"Select an Action",
+		[]string{localDevelopmentOption},
+	)
 	if err != nil {
-		log.Fatalf("Prompt failed: %v", err)
+		log.Fatalf("Failed to run prompt: %v", err)
 	}
 
-	switch result {
+	switch action {
 	case localDevelopmentOption:
 		localdevelopment.Cmd.Run(cmd, args)
+	default:
+		log.Printf("Unknown option selected: %s", action)
 	}
 }

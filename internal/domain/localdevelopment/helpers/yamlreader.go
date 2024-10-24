@@ -1,20 +1,22 @@
 package helpers
 
 import (
+	"fmt"
+	"io/ioutil"
+
 	"github.com/mh-daneshvar/dcli/internal/domain/localdevelopment/vo"
 	"gopkg.in/yaml.v3"
-	"log"
-	"os"
 )
 
-func LoadProjects(filePath string, projects *vo.Projects) {
-	yamlFile, err := os.ReadFile(filePath)
+func LoadProjects(filePath string, projects *vo.Projects) error {
+	yamlFile, err := ioutil.ReadFile(filePath)
 	if err != nil {
-		log.Fatalf("Error reading YAML file: %s", err)
+		return fmt.Errorf("error reading YAML file: %w", err)
 	}
 
-	err = yaml.Unmarshal(yamlFile, projects)
-	if err != nil {
-		log.Fatalf("Error parsing YAML file: %s", err)
+	if err := yaml.Unmarshal(yamlFile, projects); err != nil {
+		return fmt.Errorf("error parsing YAML file: %w", err)
 	}
+
+	return nil
 }
