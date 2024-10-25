@@ -51,13 +51,13 @@ projects:
 - **projects**: This is the top-level key containing all your project definitions.
 - **Project One**: This is a sample project containing multiple services.
 - **services**: A list of services associated with the project.
-    - **label**: The name of the service (e.g., "Auth Service", "Users Service").
-    - **dependencies**: Other services that must be running for this service to start.
-    - **containers**: Optional list of Docker containers that need to be running for the service.
-    - **docker_compose_file_path**: Path to the Docker Compose file responsible for managing the service.
+   - **label**: The name of the service (e.g., "Auth Service", "Users Service").
+   - **dependencies**: Other services that must be running for this service to start.
+   - **containers**: Optional list of Docker containers that need to be running for the service.
+   - **docker_compose_file_path**: Path to the Docker Compose file responsible for managing the service.
 - **common**: Shared containers and services that should be running for all services within the project.
-    - **containers**: List of shared containers.
-    - **docker_compose_file_path**: Docker Compose file for shared services.
+   - **containers**: List of shared containers.
+   - **docker_compose_file_path**: Docker Compose file for shared services.
 
 ## Installation
 
@@ -82,51 +82,59 @@ Ensure that you have the following tools installed:
    cd dcli
    ```
 
-3. Build and install the project using the provided `Makefile`. The following commands are available in the `Makefile`:
+3. **Tidy up dependencies**:
 
-    - **Build the project**:
+   ```bash
+   go mod tidy
+   ```
 
-      ```bash
-      make build
-      ```
-      This command builds the binary for your current operating system.
+   This ensures all necessary modules are correctly listed and unused dependencies are removed.
 
-    - **Install the binary**:
+4. Build and install the project using the provided `Makefile`. The following commands are available in the `Makefile`:
 
-      ```bash
-      sudo make install
-      ```
-      This installs the `dcli` binary into `/usr/local/bin` (or another path specified in the `Makefile`).
+   - **Build the project**:
 
-    - **Build for all supported platforms**:
+     ```bash
+     make build
+     ```
+     This command builds the binary for your current operating system.
 
-      ```bash
-      make build-all
-      ```
-      This cross-compiles the binary for Windows, Linux, and macOS across `amd64` architecture. The binaries will be generated in the local directory.
+   - **Install the binary**:
 
-    - **Clean up the built binaries**:
+     ```bash
+     sudo make install
+     ```
+     This installs the `dcli` binary into `/usr/local/bin` (or another path specified in the `Makefile`).
 
-      ```bash
-      make clean
-      ```
-      This removes any previously built binaries from the local directory.
+   - **Build for all supported platforms**:
 
-    - **Uninstall the binary**:
+     ```bash
+     make build-all
+     ```
+     This cross-compiles the binary for Windows, Linux, and macOS across `amd64` architecture. The binaries will be generated in the local directory.
 
-      ```bash
-      sudo make uninstall
-      ```
-      This removes the installed binary from the system (default location: `/usr/local/bin`).
+   - **Clean up the built binaries**:
 
-    - **Cross-compile for a specific platform** (e.g., Windows `amd64`):
+     ```bash
+     make clean
+     ```
+     This removes any previously built binaries from the local directory.
 
-      ```bash
-      make build-cross OS=windows ARCH=amd64
-      ```
-      This cross-compiles the binary for a specific OS and architecture.
+   - **Uninstall the binary**:
 
-4. Clone the helper repository that contains sample projects and services:
+     ```bash
+     sudo make uninstall
+     ```
+     This removes the installed binary from the system (default location: `/usr/local/bin`).
+
+   - **Cross-compile for a specific platform** (e.g., Windows `amd64`):
+
+     ```bash
+     make build-cross OS=windows ARCH=amd64
+     ```
+     This cross-compiles the binary for a specific OS and architecture.
+
+5. Clone the helper repository that contains sample projects and services:
 
    ```bash
    git clone https://github.com/mh-daneshvar/dcli-other-projects.git
@@ -170,8 +178,8 @@ Once the `dcli` binary is installed, running the CLI will present you with an in
    ```
 
 5. Based on your selection:
-    - The selected service will either start or stop.
-    - If "Stop All Services" is selected, all services related to that project will be stopped.
+   - The selected service will either start or stop.
+   - If "Stop All Services" is selected, all services related to that project will be stopped.
 
 ## Contributing
 
