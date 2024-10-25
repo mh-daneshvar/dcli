@@ -51,4 +51,10 @@ build-cross:
 	GOOS=$(OS) GOARCH=$(ARCH) GO111MODULE=on go build -o $(BINARY_NAME)-$(OS)-$(ARCH) $(CMD_PATH)
 	@echo "Cross-build complete for $(OS)/$(ARCH)."
 
-.PHONY: build clean install uninstall build-all build-cross
+# Run all tests
+test:
+	@echo "Running all tests..."
+	go test -v ./...
+	@echo "Tests completed."
+
+.PHONY: build clean install uninstall build-all build-cross test
