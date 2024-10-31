@@ -39,6 +39,10 @@ projects:
       - label: Users Service
         docker_compose_file_path: /path/to/users-service/docker-compose.yaml
       - label: Catalogue Service
+        commands:
+          - whoami
+          - eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github
+          - 'echo "SSH Agent PID: $SSH_AGENT_PID"'
         docker_compose_file_path: /path/to/catalogue-service/docker-compose.yaml
     common:
       containers:
