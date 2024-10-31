@@ -9,6 +9,10 @@ projects:
       - label: Users Service
         docker_compose_file_path: /Users/mohammad/Documents/projects/goworkspace/src/dcli-other-projects/project-one/users-service/docker-compose.yaml
       - label: Catalogue Service
+        commands:
+          - whoami
+          - eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github
+          - 'echo "SSH Agent PID: $SSH_AGENT_PID"'
         docker_compose_file_path: /Users/mohammad/Documents/projects/goworkspace/src/dcli-other-projects/project-one/catalogue-service/docker-compose.yaml
     common:
       docker_compose_file_path: /Users/mohammad/Documents/projects/goworkspace/src/dcli-other-projects/project-one/common-services/docker-compose.yaml

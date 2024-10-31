@@ -2,10 +2,20 @@ package docker
 
 import (
 	"fmt"
+	"os/exec"
 
 	"github.com/mh-daneshvar/dcli/internal/adapters/secondary/cli"
 	"github.com/mh-daneshvar/dcli/internal/domain/localdevelopment/vo"
 )
+
+func GetRunningContainers() (string, error) {
+	cmd := exec.Command("docker", "ps", "--format", "{{.Names}}\\t{{.Image}}")
+	output, err := cmd.Output()
+	if err != nil {
+		return "", fmt.Errorf("error running docker ps: %w", err)
+	}
+	return string(output), nil
+}
 
 func StartProject(project vo.Project) error {
 	if err := startContainers(project.Common.Containers); err != nil {

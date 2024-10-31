@@ -3,29 +3,19 @@ package docker
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"strings"
 
 	"github.com/olekukonko/tablewriter"
 )
 
 func PrintRunningContainers() {
-	output, err := getDockerContainers()
+	output, err := GetRunningContainers()
 	if err != nil {
 		fmt.Printf("Error running docker ps: %v\n", err)
 		return
 	}
 
 	renderContainerTable(output)
-}
-
-func getDockerContainers() (string, error) {
-	cmd := exec.Command("docker", "ps", "--format", "{{.Names}}\\t{{.Image}}")
-	output, err := cmd.Output()
-	if err != nil {
-		return "", fmt.Errorf("error running docker ps: %w", err)
-	}
-	return string(output), nil
 }
 
 func renderContainerTable(output string) {

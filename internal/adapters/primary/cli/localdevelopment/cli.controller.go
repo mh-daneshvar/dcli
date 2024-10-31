@@ -2,6 +2,7 @@ package localdevelopment
 
 import (
 	"fmt"
+	"github.com/mh-daneshvar/dcli/internal/adapters/secondary/cli"
 	"github.com/spf13/cobra"
 	"log"
 
@@ -60,6 +61,11 @@ func handler() error {
 		}
 		if err := docker.StartService(project, service); err != nil {
 			return fmt.Errorf("failed to start service: %w", err)
+		}
+		for _, command := range service.Commands {
+			if err := cli.RunCliCommand(command); err != nil {
+				return fmt.Errorf("failed to run command: %w", err)
+			}
 		}
 	}
 
